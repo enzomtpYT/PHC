@@ -1,0 +1,22 @@
+# Stage 1: Build
+FROM python:3.10-slim as builder
+
+WORKDIR /app
+COPY src/requirements.txt .
+RUN pip install --user -r requirements.txt
+
+# Stage 2: Runtime
+FROM python:3.10-slim
+
+WORKDIR /app
+COPY --from=builder /root/.local /root/.local
+COPY . .
+
+# Assurer que les scripts dans .local sont utilisables
+ENV PATH=/root/.local/bin:$PATH
+
+# Port exposé
+EXPOSE 8501
+
+# Commande par défaut
+CMD ["streamlit", "run", "src/Home.py"]

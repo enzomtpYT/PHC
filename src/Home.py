@@ -1,17 +1,19 @@
-"""Home"""
 import streamlit as st
-from PIL import Image
+from database import init_db
+from auth import require_auth
 
-st.set_page_config(page_title="Home", page_icon="🏠")
+init_db()
 
-st.sidebar.header("Home")
-st.sidebar.write(
-    """
-Take care of your body. It's the only place you have to live in.
-"""
-)
+if not require_auth():
+    st.stop()
 
-st.write("# Personal Health Coach")
-st.divider()
+# -----------------------
+# APP SECURISEE
+# -----------------------
 
-st.image(Image.open("data/home.jpg"), width=600)
+st.title("🏋️ Dashboard Santé")
+
+st.write(f"Bienvenue {st.session_state.username} 👌")
+
+st.subheader("Contenu protégé")
+st.write("Tes données apparaissent ici")
