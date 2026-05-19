@@ -1,3 +1,8 @@
+> [!WARNING]
+> This is a school project for docker ci stuff
+> i didn't make any of this code, only workflow
+> and the Dockerfile / Compose file
+
 # Personal Health Coach (PHC)
 
 ## Introduction
