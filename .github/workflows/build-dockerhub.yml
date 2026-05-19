@@ -41,9 +41,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          load: true
 
       - name: Save Docker image as tar
-        run: docker save -o phc-image.tar ${{ env.IMAGE_NAME }}:latest
+        run: docker save -o phc-image.tar ${{ steps.meta.outputs.tags }}
 
       - name: Upload Docker image tar as artifact
         uses: actions/upload-artifact@v4
