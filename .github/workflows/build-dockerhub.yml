@@ -33,7 +33,7 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
 
-      - name: Build and push Docker image
+      - name: Build and push multi-platform Docker image
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
@@ -41,11 +41,19 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          load: true
           platforms: linux/amd64,linux/arm64
 
+      - name: Build single-platform image for artifact
+        id: build-single-platform
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          tags: ${{ env.IMAGE_NAME }}:latest
+          load: true
+          platforms: linux/amd64
+
       - name: Save Docker image as tar
-        run: docker save -o phc-image.tar ${{ steps.meta.outputs.tags }}
+        run: docker save -o phc-image.tar ${{ env.IMAGE_NAME }}:latest
 
       - name: Upload Docker image tar as artifact
         uses: actions/upload-artifact@v4
