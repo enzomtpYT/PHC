@@ -42,6 +42,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           load: true
+          platforms: linux/amd64,linux/arm64
 
       - name: Save Docker image as tar
         run: docker save -o phc-image.tar ${{ steps.meta.outputs.tags }}
