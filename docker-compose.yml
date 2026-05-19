@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   phc:
     build: .
@@ -9,4 +7,4 @@ services:
       - .:/app
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-    command: streamlit run src/Home.py
+    command: uv run streamlit run src/Home.py
