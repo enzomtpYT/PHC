@@ -28,7 +28,7 @@ HEALTH_WORKOUT_FILE = os.getenv("HEALTH_WORKOUT_FILE")
 # OLLAMA CONFIG
 # =========================
 OLLAMA_URL = "http://ollama:11434/api/generate"
-MODEL = "llama3.2:1b"
+MODEL = "lfm2.5-thinking:latest"
 
 # =========================
 # STREAMLIT CONFIG

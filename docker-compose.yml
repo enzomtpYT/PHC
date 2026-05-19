@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-simple
+    ports:
+      - "8501:8501"
+    environment:
+      - OLLAMA_HOST=ollama
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    command: > 
+      "ollama serve & sleep 5 && ollama install lfm2.5-thinking:latest && wait"
+
+volumes:
+  ollama_data:

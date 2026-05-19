@@ -3,7 +3,7 @@ import requests
 OLLAMA_URL = "http://localhost:11434/api/generate"
 
 
-def ask_llm(prompt, model="llama3.2:1b"):
+def ask_llm(prompt, model="lfm2.5-thinking:latest"):
     response = requests.post(
         OLLAMA_URL,
         json={
